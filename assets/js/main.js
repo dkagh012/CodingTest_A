@@ -1,3 +1,17 @@
+// 변수
+const AreaOpenBtn = document.querySelector(".area");
+const AreaBox = document.querySelector(".AreaBox");
+const AreaCloseBtn = document.querySelector(".AreaClose");
+const AreaTagBox = document.querySelector(".AreaTag");
+const buttons = document.querySelectorAll(".AreaTag button");
+const completeButton = document.querySelector(".AreaBtn .Btn");
+const inputField = document.querySelector("#area");
+const FreeTextBoxOpen = document.querySelector("#free");
+const radioButtons = document.querySelectorAll('.time input[type="radio"]');
+const freeTimeInput = document.querySelector("#free-time");
+const textareas = document.querySelectorAll(".textarea-box textarea");
+const submitButton = document.querySelector(".btn_submit");
+
 // 공통 컴포넌트
 function toggleClassList(target, className) {
   target.classList.toggle(className);
@@ -14,69 +28,39 @@ function removeEmojis(text) {
   const emojiRegex = /[^0-9a-zA-Zㄱ-힣\s!@#$%^&*(),.?/":{}|<>]/g;
   return text.replace(emojiRegex, "");
 }
-// 변수
-const AreaOpenBtn = document.querySelector(".area");
-const AreaBox = document.querySelector(".AreaBox");
-const AreaCloseBtn = document.querySelector(".AreaClose");
-const AreaTagBox = document.querySelector(".AreaTag");
-const buttons = document.querySelectorAll(".AreaTag button");
-const completeButton = document.querySelector(".AreaBtn .Btn");
-const inputField = document.querySelector("#area");
-const FreeTextBoxOpen = document.querySelector("#free");
-AreaOpenBtn.addEventListener("click", () => {
+// 지역선택 버튼 클릭 시 이벤트 핸들러
+function handleAreaOpen() {
   removeClassList(AreaBox, "hidden");
-});
-AreaCloseBtn.addEventListener("click", () => {
-  addClassList(AreaBox, "hidden");
-});
-FreeTextBoxOpen.addEventListener("click", () => {
-  removeClassList(AreaBox, "hidden");
-});
-FreeTextBoxOpen.addEventListener("click", () => {
-  addClassList(AreaBox, "hidden");
-});
+  AreaOpenBtn.style.backgroundImage = `url('assets/images/arrow-top.png')`;
+}
 
-buttons.forEach((button) => {
-  button.addEventListener("click", function () {
-    buttons.forEach((btn) => btn.classList.remove("active"));
-    this.classList.add("active");
-  });
-});
-
-completeButton.addEventListener("click", function () {
+// 지역선택 닫기 버튼 클릭 시 이벤트 핸들러
+function handleAreaClose() {
+  addClassList(AreaBox, "hidden");
+  AreaOpenBtn.style.backgroundImage = "url('assets/images/arrow-bottom.png')";
+}
+// 특정 버튼 활성화 함수
+function activateButton(buttons, activeButton) {
+  buttons.forEach((btn) => btn.classList.remove("active"));
+  activeButton.classList.add("active");
+}
+// 지역선택 완료 버튼 클릭 시 이벤트 핸들러
+function handleAreaComplete() {
   const activeButton = document.querySelector(".AreaTag button.active");
   if (activeButton) {
     inputField.value = activeButton.textContent;
     addClassList(AreaBox, "hidden");
   }
-});
-const radioButtons = document.querySelectorAll('.time input[type="radio"]');
-const freeTimeInput = document.querySelector("#free-time");
+}
 
-radioButtons.forEach((radio) => {
-  radio.addEventListener("change", function () {
-    if (this.id === "free") {
-      freeTimeInput.classList.remove("hidden");
-    }
-  });
-});
+// 특정 라디오 버튼 변경 시 이벤트 핸들러
+function handleRadioChange() {
+  if (this.id === "free") {
+    freeTimeInput.classList.remove("hidden");
+  }
+}
 
-freeTimeInput.addEventListener("input", function () {
-  this.value = removeEmojis(this.value);
-});
-
-const textareas = document.querySelectorAll(".textarea-box textarea");
-
-textareas.forEach((textarea) => {
-  const charCountSpan = textarea.nextElementSibling.querySelector("span");
-
-  textarea.addEventListener("input", function () {
-    const charCount = textarea.value.length;
-    charCountSpan.textContent = charCount;
-
-    textarea.value = removeEmojis(textarea.value);
-  });
-});
+// 유효성 검사 함수
 function validateForm() {
   const areaInput = document.getElementById("area");
   const nameInput = document.getElementById("name");
@@ -160,26 +144,56 @@ function toggleButtonState() {
     submitButton.classList.add("active");
   }
 }
-document.addEventListener("DOMContentLoaded", function () {
-  const submitButton = document.querySelector(".btn_submit");
+// 지역선택 버튼 이벤트 등록
+AreaOpenBtn.addEventListener("click", handleAreaOpen);
+AreaCloseBtn.addEventListener("click", handleAreaClose);
 
-  toggleButtonState();
+// 지역선택 버튼 이벤트 등록
+buttons.forEach((button) => {
+  button.addEventListener("click", function () {
+    activateButton(buttons, this);
+  });
+});
+// 지역선택 완료 버튼 이벤트 등록
+completeButton.addEventListener("click", handleAreaComplete);
 
-  document
-    .querySelectorAll(
-      ".forms-group input, .UserDataCheck input[type='checkbox']"
-    )
-    .forEach((input) => {
-      input.addEventListener("input", toggleButtonState);
-    });
+// 라디오 버튼 이벤트 등록
+radioButtons.forEach((radio) => {
+  radio.addEventListener("change", handleRadioChange);
+});
 
-  document.querySelectorAll('.time input[type="radio"]').forEach((radio) => {
-    radio.addEventListener("change", toggleButtonState);
+freeTimeInput.addEventListener("input", function () {
+  this.value = removeEmojis(this.value);
+});
+
+// 특정 textarea 입력 시 이벤트 핸들러
+function handleTextareaInput(textarea) {
+  const charCountSpan = textarea.nextElementSibling.querySelector("span");
+  const charCount = textarea.value.length;
+  charCountSpan.textContent = charCount;
+  textarea.value = removeEmojis(textarea.value);
+}
+// textarea 이벤트 등록
+textareas.forEach((textarea) => {
+  textarea.addEventListener("input", function () {
+    handleTextareaInput(textarea);
+  });
+});
+
+toggleButtonState();
+
+document
+  .querySelectorAll(".forms-group input, .UserDataCheck input[type='checkbox']")
+  .forEach((input) => {
+    input.addEventListener("input", toggleButtonState);
   });
 
-  submitButton.addEventListener("click", function (event) {
-    if (validateForm()) {
-      alert("제출되었습니다!");
-    }
-  });
+document.querySelectorAll('.time input[type="radio"]').forEach((radio) => {
+  radio.addEventListener("change", toggleButtonState);
+});
+
+submitButton.addEventListener("click", function (event) {
+  if (validateForm()) {
+    alert("제출되었습니다!");
+  }
 });

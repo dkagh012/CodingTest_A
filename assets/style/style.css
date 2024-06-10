@@ -341,7 +341,7 @@ input[type=file]::file-selector-button {
   border-radius: 8px;
   padding: 13px 12px;
   width: 100%;
-  background: url(../images/icon_select_arrow.png) no-repeat right 14px center;
+  background: url(../images/arrow-bottom.png) no-repeat right 14px center;
   outline: none;
   cursor: pointer;
 }
