@@ -39,7 +39,7 @@ function toggleButtonState() {
   - 담당자 전화번호 (numberInput)
   - 담당자 통화가능한 시간 (timeInput)
   - 개인정보 수집 및 이용동의 (userDataCheckbox)
-  - 
+
 이렇게 변수명을 지정하고 각자 value 및 checked를 확인해서 입점신청 버튼을 활성화/비활성화를 하였습니다
 
 ### 필수값 모두 입력 안함
