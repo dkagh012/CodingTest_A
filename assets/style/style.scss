@@ -27,11 +27,42 @@
   }
 
   main {
-    padding: 28px 16px;
+    padding: 28px 0;
 
     .forms-group {
-      padding: 8px 0;
-
+      padding: 8px 16px;
+      &.subline {
+        position: relative;
+        &::after {
+          content: " ";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: #efefef;
+          border: 1px solid #d2d2d2;
+          border-bottom: 0;
+          border-left: 0;
+          border-right: 0;
+        }
+      }
+      &.line {
+        position: relative;
+        &::after {
+          content: " ";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 8px;
+          background: #efefef;
+          border: 1px solid #d2d2d2;
+          border-bottom: 0;
+          border-left: 0;
+          border-right: 0;
+        }
+      }
       &:first-child {
         padding-top: 0;
       }
@@ -101,18 +132,29 @@
         }
         .textarea-box {
           position: relative;
+          height: 104px;
           textarea {
+            height: 100%;
             resize: none;
             width: 100%;
-            height: 104px;
+            padding: 8px 8px 22px 8px;
+            outline: none;
+            border-radius: 4px;
             &::-webkit-scrollbar {
               display: none;
             }
           }
           > div {
             position: absolute;
-            bottom: 8px;
-            right: 8px;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            height: 22px;
+            text-align: right;
+            padding-right: 8px;
+            border: 1px solid #ddd;
+            border-top: 0;
+            border-radius: 0px 0px 4px 4px;
             span {
               color: #5064ff;
             }
@@ -208,13 +250,24 @@
           color: #8f8f8f;
         }
       }
-      &:nth-child(8) {
+      &:nth-child(7) {
         padding-bottom: 28px;
       }
+      &:nth-child(8) {
+        padding: 28px 16px;
+      }
+      &:nth-child(5) {
+        padding-bottom: 28px;
+      }
+      &:nth-child(6) {
+        padding-top: 28px;
+      }
     }
+
     .forms-button {
       width: 100%;
       height: 44px;
+      padding: 0 16px;
       .btn_submit {
         height: 100%;
         background: #5064ff;

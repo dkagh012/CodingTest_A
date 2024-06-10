@@ -137,6 +137,13 @@ function toggleButtonState() {
 function handleTextareaInput(textarea) {
   const charCountSpan = textarea.nextElementSibling.querySelector("span");
   const charCount = textarea.value.length;
+  if (textarea.value.length) {
+    textarea.style.borderColor = "black";
+    charCountSpan.parentNode.style.borderColor = "black";
+  } else {
+    textarea.style.borderColor = "#ddd";
+    charCountSpan.parentNode.style.borderColor = "#ddd";
+  }
   charCountSpan.textContent = charCount;
   textarea.value = removeEmojis(textarea.value);
 }
