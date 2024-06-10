@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>뷰리드</title>
+    <link rel="stylesheet" href="./assets/style/xeicon.min.css" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="AreaBox hidden">
+        <div class="Area-top">
+          <button class="AreaClose" type="button">
+            <i class="xi-close"></i>
+          </button>
+          <strong>지역선택</strong>
+        </div>
+        <div class="Area-bottom">
+          <h2>대지역</h2>
+          <ul class="AreaTag">
+            <li><button type="button">서울</button></li>
+            <li><button type="button">경기</button></li>
+            <li><button type="button">인천</button></li>
+            <li><button type="button">강원</button></li>
+            <li><button type="button">제주</button></li>
+            <li><button type="button">대전</button></li>
+            <li><button type="button">충북</button></li>
+            <li><button type="button">충남 · 세종</button></li>
+            <li><button type="button">부산</button></li>
+            <li><button type="button">울산</button></li>
+            <li><button type="button">경남</button></li>
+            <li><button type="button">대구</button></li>
+            <li><button type="button">경북</button></li>
+            <li><button type="button">광주</button></li>
+            <li><button type="button">전남</button></li>
+            <li><button type="button">전주 · 전북</button></li>
+          </ul>
+        </div>
+        <div class="AreaBtn">
+          <button type="button" class="Btn">선택완료</button>
+        </div>
+      </div>
+      <header>
+        <h1>입점문의</h1>
+      </header>
+      <main>
+        <form action="">
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong aria-label="지역">지역</strong>
+            </div>
+            <div class="forms-end">
+              <input
+                type="text"
+                class="area"
+                id="area"
+                placeholder="지역"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong aria-label="업체명"
+                >업체명 <span>(소재명+업체명)</span></strong
+              >
+            </div>
+            <div class="forms-end">
+              <input
+                type="text"
+                id="name"
+                placeholder="주식회사 뷰리드"
+                maxlength="12"
+              />
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong aria-label="담당자 전화번호">담당자 전화번호</strong>
+            </div>
+            <div class="forms-end">
+              <input type="text" id="number" placeholder="01012345678" />
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong>담당자 통화 가능한 시간</strong>
+            </div>
+            <div class="forms-end">
+              <ul class="time">
+                <li>
+                  <input type="radio" id="am" name="am" />
+                  <label for="am">오전(8시~12시)</label>
+                </li>
+                <li>
+                  <input type="radio" id="pm" name="pm" />
+                  <label for="pm">오후(13시~18시)</label>
+                </li>
+                <li>
+                  <input type="radio" id="free" name="free" />
+                  <label for="free">직접입력</label>
+                </li>
+              </ul>
+              <input
+                type="number"
+                id="free-time"
+                class="hidden"
+                placeholder="22:30 ~ 24:00 / 04:00 ~ 06:30"
+              />
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong>문의내용</strong>
+            </div>
+            <div class="forms-end">
+              <div class="textarea-box">
+                <textarea name="" id="" maxlength="300"></textarea>
+                <div><span>0</span>/300</div>
+              </div>
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong>마캉스를 알게 된 경로(중복가능)</strong>
+            </div>
+            <div class="forms-end">
+              <div class="textarea-box">
+                <textarea name="" type="text" id="" maxlength="100"></textarea>
+                <div><span>0</span>/100</div>
+              </div>
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <strong>마캉스를 알게 된 경로(중복가능)</strong>
+            </div>
+            <div class="forms-end">
+              <ul class="markings">
+                <li>
+                  <input type="checkbox" id="sns" name="sns" />
+                  <label for="sns">SNS(인스타그램,페이수북 등)</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="recommend" name="recommend" />
+                  <label for="recommend">지인추천</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="out" name="out" />
+                  <label for="out">외부광고</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="search" name="search" />
+                  <label for="search">인터넷 검색</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="etc" name="etc" />
+                  <label id="etc">기타</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="forms-group">
+            <div class="forms-title">
+              <div class="forms-title UserDataCheck">
+                <input type="checkbox" /><strong
+                  >개인정보 수집 및 이용동의(필수)</strong
+                >
+              </div>
+            </div>
+            <div class="forms-end UserDataDetail">
+              <div>
+                <span>
+                  (주)뷰리드 제휴입점문의 접수 시, 필요한 최소한의 개인 정보만을
+                  수집 및 이용합니다
+                </span>
+              </div>
+              <ul>
+                <li>
+                  <p>1. 수집하는 개인정보항목</p>
+                  <ul>
+                    <li>
+                      <h2>수집하는 개인 정보 항목</h2>
+                      <span>지역명,업체명,연락처</span>
+                    </li>
+                    <li>
+                      <h2>수집 및 이용목적</h2>
+                      <span>제휴/입점 문의사항 접수 및 처리결과 확신</span>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <p>2. 수집 및 이용먹적: 입점문의사항 접수 및 처리결과 회신</p>
+                </li>
+                <li>
+                  <p>
+                    3. 개인정보의 이용기간: 목적 달성 후 , 해당 개인정보를
+                    지체없이 파기
+                  </p>
+                </li>
+              </ul>
+              <p>
+                위 개인정보 수집 및 이용에 대한 동의를 거부할 권리가
+                있습니다.동의하지 않은 경우 제휴/입점 문의가 제한될 수 있습니다.
+              </p>
+            </div>
+          </div>
+          <div class="forms-button">
+            <button type="submit" class="btn_submit active">입점신청</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+  <script src="./assets/js/main.js"></script>
+</html>
