@@ -532,10 +532,12 @@ input[type=file]::file-selector-button {
 .container .AreaBox .Area-bottom ul li button:hover {
   color: #ffffff;
   background: #5064ff;
+  font-weight: 700;
 }
 .container .AreaBox .Area-bottom ul li button.active {
   color: #ffffff;
   background: #5064ff;
+  font-weight: 700;
 }
 .container .AreaBox .AreaBtn .Btn {
   font-size: 16px;

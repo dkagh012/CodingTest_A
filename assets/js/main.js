@@ -6,11 +6,16 @@ const AreaTagBox = document.querySelector(".AreaTag");
 const buttons = document.querySelectorAll(".AreaTag button");
 const completeButton = document.querySelector(".AreaBtn .Btn");
 const inputField = document.querySelector("#area");
-const FreeTextBoxOpen = document.querySelector("#free");
-const radioButtons = document.querySelectorAll('.time input[type="radio"]');
+const timeInput = document.querySelectorAll('.time input[type="radio"]');
 const freeTimeInput = document.querySelector("#free-time");
+const nameInput = document.querySelector("#name");
 const textareas = document.querySelectorAll(".textarea-box textarea");
 const submitButton = document.querySelector(".btn_submit");
+const areaInput = document.getElementById("area");
+const numberInput = document.getElementById("number");
+const userDataCheckbox = document.querySelector(
+  '.UserDataCheck input[type="checkbox"]'
+);
 
 // 공통 컴포넌트
 function toggleClassList(target, className) {
@@ -62,19 +67,11 @@ function handleRadioChange() {
 
 // 유효성 검사 함수
 function validateForm() {
-  const areaInput = document.getElementById("area");
-  const nameInput = document.getElementById("name");
-  const numberInput = document.getElementById("number");
-  const radioButtons = document.querySelectorAll('.time input[type="radio"]');
-  const userDataCheckbox = document.querySelector(
-    '.UserDataCheck input[type="checkbox"]'
-  );
-  console.log(areaInput.parentNode.parentNode.querySelector("strong"));
   if (areaInput.value === "") {
     alert(
       `${
         areaInput.parentNode.parentNode.querySelector("strong").ariaLabel
-      }는 필수 입력란입니다.`
+      }은 필수 입력란입니다.`
     );
     return false;
   }
@@ -83,7 +80,7 @@ function validateForm() {
     alert(
       `${
         nameInput.parentNode.parentNode.querySelector("strong").ariaLabel
-      }는 필수 입력란입니다.`
+      }은 필수 입력란입니다.`
     );
     return false;
   }
@@ -92,13 +89,13 @@ function validateForm() {
     alert(
       `${
         numberInput.parentNode.parentNode.querySelector("strong").ariaLabel
-      }는 필수 입력란입니다.`
+      }은 필수 입력란입니다.`
     );
     return false;
   }
 
   let timeChecked = false;
-  radioButtons.forEach((radio) => {
+  timeInput.forEach((radio) => {
     if (radio.checked) {
       timeChecked = true;
     }
@@ -114,20 +111,12 @@ function validateForm() {
 
   return true;
 }
+// 입점신청 버튼 활성화/비활성화
 function toggleButtonState() {
-  const areaInput = document.getElementById("area");
-  const nameInput = document.getElementById("name");
-  const numberInput = document.getElementById("number");
-  const radioButtons = document.querySelectorAll('.time input[type="radio"]');
-  const userDataCheckbox = document.querySelector(
-    '.UserDataCheck input[type="checkbox"]'
-  );
-  const submitButton = document.querySelector(".btn_submit");
-
   const isAreaValid = areaInput.value.trim() !== "";
   const isNameValid = nameInput.value.trim() !== "";
   const isNumberValid = numberInput.value.trim() !== "";
-  const isTimeChecked = Array.from(radioButtons).some((radio) => radio.checked);
+  const isTimeChecked = Array.from(timeInput).some((radio) => radio.checked);
   const isCheckboxChecked = userDataCheckbox.checked;
 
   if (
@@ -144,6 +133,13 @@ function toggleButtonState() {
     submitButton.classList.add("active");
   }
 }
+// 특정 textarea 입력 시 이벤트 핸들러
+function handleTextareaInput(textarea) {
+  const charCountSpan = textarea.nextElementSibling.querySelector("span");
+  const charCount = textarea.value.length;
+  charCountSpan.textContent = charCount;
+  textarea.value = removeEmojis(textarea.value);
+}
 // 지역선택 버튼 이벤트 등록
 AreaOpenBtn.addEventListener("click", handleAreaOpen);
 AreaCloseBtn.addEventListener("click", handleAreaClose);
@@ -158,21 +154,17 @@ buttons.forEach((button) => {
 completeButton.addEventListener("click", handleAreaComplete);
 
 // 라디오 버튼 이벤트 등록
-radioButtons.forEach((radio) => {
+timeInput.forEach((radio) => {
   radio.addEventListener("change", handleRadioChange);
 });
 
 freeTimeInput.addEventListener("input", function () {
   this.value = removeEmojis(this.value);
 });
+nameInput.addEventListener("input", function () {
+  this.value = removeEmojis(this.value);
+});
 
-// 특정 textarea 입력 시 이벤트 핸들러
-function handleTextareaInput(textarea) {
-  const charCountSpan = textarea.nextElementSibling.querySelector("span");
-  const charCount = textarea.value.length;
-  charCountSpan.textContent = charCount;
-  textarea.value = removeEmojis(textarea.value);
-}
 // textarea 이벤트 등록
 textareas.forEach((textarea) => {
   textarea.addEventListener("input", function () {
@@ -191,9 +183,11 @@ document
 document.querySelectorAll('.time input[type="radio"]').forEach((radio) => {
   radio.addEventListener("change", toggleButtonState);
 });
-
+// 입점신청 버튼 클릭 이벤트
 submitButton.addEventListener("click", function (event) {
-  if (validateForm()) {
+  if (!validateForm()) {
+    event.preventDefault(); // 유효성 검사 실패 시 제출 방지
+  } else {
     alert("제출되었습니다!");
   }
 });
