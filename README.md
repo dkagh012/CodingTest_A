@@ -133,15 +133,20 @@ AreaCloseBtn.addEventListener("click", handleAreaClose);
 # 3. 업체명
 
 ```
+function removeSpecialChars(text) {
+  const allowedCharRegex = /[^\wㄱ-힣\s]/g;
+  return text.replace(allowedCharRegex, "");
+}
+
 nameInput.addEventListener("input", function () {
-  this.value = removeEmojis(this.value);
+  this.value = removeSpecialChars(this.value);
 });
 ```
 
 글자수 제한은 input에 maxlength="12" 와 같이 입력하였습니다
-removeEmojis에는 특수문자 숫자 한글 영어 로만 입력이 가능하도록 작업하였습니다
+removeSpecialChars 숫자 한글 영어 로만 입력이 가능하도록 작업하였습니다
 
-# 4. 업체명
+# 4.담당자 전화번호
 
 input에 type을 number로 지정하여 숫자 외 다른 값 입력 시 자동삭제 되도록 하였습니다
 
@@ -197,14 +202,18 @@ removeEmojis를 사용하여 이모지 사용을 제한하고 제공해주신 �
 중복 선택이 가능하도록 개발하였습니다
 
 ```
-textareas.forEach((textarea) => {
-  textarea.addEventListener("input", function () {
-    handleTextareaInput(textarea);
-  });
+etcCheckbox.addEventListener("change", () => {
+  if (etcCheckbox.checked) {
+    textareaBox.style.display = "block";
+  } else {
+    textareaBox.style.display = "none";
+  }
 });
 ```
 
 textarea 태그를 사용하였고 위와 같은 컴포넌트를 사용하였습니다.
+
+기타를 id값을 etc로 하고 클릭 시 display를 조절하게 끔 하였습니다
 
 # 8.약관 동의
 
