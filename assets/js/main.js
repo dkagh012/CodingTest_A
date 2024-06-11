@@ -170,6 +170,7 @@ completeButton.addEventListener("click", handleAreaComplete);
 TimeCheckBox.forEach((radio) => {
   radio.addEventListener("change", handleRadioChange);
 });
+// 기타 버튼 클릭 시 텍스트 필드 표시
 etcCheckbox.addEventListener("change", () => {
   if (etcCheckbox.checked) {
     textareaBox.style.display = "block";
@@ -177,6 +178,7 @@ etcCheckbox.addEventListener("change", () => {
     textareaBox.style.display = "none";
   }
 });
+
 freeTimeInput.addEventListener("input", function () {
   this.value = removeEmojis(this.value);
 });
