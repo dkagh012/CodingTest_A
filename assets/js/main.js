@@ -6,7 +6,7 @@ const AreaTagBox = document.querySelector(".AreaTag");
 const buttons = document.querySelectorAll(".AreaTag button");
 const completeButton = document.querySelector(".AreaBtn .Btn");
 const inputField = document.querySelector("#area");
-const timeInput = document.querySelectorAll('.time input[type="radio"]');
+const TimeCheckBox = document.querySelectorAll('.time input[type="radio"]');
 const freeTimeInput = document.querySelector("#free-time");
 const nameInput = document.querySelector("#name");
 const textareas = document.querySelectorAll(".textarea-box textarea");
@@ -16,6 +16,8 @@ const numberInput = document.getElementById("number");
 const userDataCheckbox = document.querySelector(
   '.UserDataCheck input[type="checkbox"]'
 );
+const etcCheckbox = document.querySelector("#etc");
+const textareaBox = document.querySelector(".marking-box");
 
 // 공통 컴포넌트
 function toggleClassList(target, className) {
@@ -32,6 +34,10 @@ function removeClassList(target, className) {
 function removeEmojis(text) {
   const emojiRegex = /[^0-9a-zA-Zㄱ-힣\s!@#$%^&*(),.?/":{}|<>]/g;
   return text.replace(emojiRegex, "");
+}
+function removeSpecialChars(text) {
+  const allowedCharRegex = /[^\wㄱ-힣\s]/g;
+  return text.replace(allowedCharRegex, "");
 }
 // 지역선택 버튼 클릭 시 이벤트 핸들러
 function handleAreaOpen() {
@@ -95,7 +101,7 @@ function validateForm() {
   }
 
   let timeChecked = false;
-  timeInput.forEach((radio) => {
+  TimeCheckBox.forEach((radio) => {
     if (radio.checked) {
       timeChecked = true;
     }
@@ -116,7 +122,7 @@ function toggleButtonState() {
   const isAreaValid = areaInput.value.trim() !== "";
   const isNameValid = nameInput.value.trim() !== "";
   const isNumberValid = numberInput.value.trim() !== "";
-  const isTimeChecked = Array.from(timeInput).some((radio) => radio.checked);
+  const isTimeChecked = Array.from(TimeCheckBox).some((radio) => radio.checked);
   const isCheckboxChecked = userDataCheckbox.checked;
 
   if (
@@ -161,15 +167,21 @@ buttons.forEach((button) => {
 completeButton.addEventListener("click", handleAreaComplete);
 
 // 라디오 버튼 이벤트 등록
-timeInput.forEach((radio) => {
+TimeCheckBox.forEach((radio) => {
   radio.addEventListener("change", handleRadioChange);
 });
-
+etcCheckbox.addEventListener("change", () => {
+  if (etcCheckbox.checked) {
+    textareaBox.style.display = "block";
+  } else {
+    textareaBox.style.display = "none";
+  }
+});
 freeTimeInput.addEventListener("input", function () {
   this.value = removeEmojis(this.value);
 });
 nameInput.addEventListener("input", function () {
-  this.value = removeEmojis(this.value);
+  this.value = removeSpecialChars(this.value);
 });
 
 // textarea 이벤트 등록

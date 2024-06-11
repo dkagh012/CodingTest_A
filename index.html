@@ -103,7 +103,7 @@
                 </li>
               </ul>
               <input
-                type="number"
+                type="text"
                 id="free-time"
                 class="hidden"
                 placeholder="22:30 ~ 24:00 / 04:00 ~ 06:30"
@@ -122,17 +122,6 @@
             </div>
           </div>
           <div class="forms-group subline">
-            <div class="forms-title">
-              <strong>마캉스를 알게 된 경로(중복가능)</strong>
-            </div>
-            <div class="forms-end">
-              <div class="textarea-box">
-                <textarea name="" type="text" id="" maxlength="100"></textarea>
-                <div><span>0</span>/100</div>
-              </div>
-            </div>
-          </div>
-          <div class="forms-group">
             <div class="forms-title">
               <strong>마캉스를 알게 된 경로(중복가능)</strong>
             </div>
@@ -156,9 +145,13 @@
                 </li>
                 <li>
                   <input type="checkbox" id="etc" name="etc" />
-                  <label id="etc">기타</label>
+                  <label for="etc">기타</label>
                 </li>
               </ul>
+              <div class="textarea-box marking-box" style="display: none">
+                <textarea name="" type="text" id="" maxlength="100"></textarea>
+                <div><span>0</span>/100</div>
+              </div>
             </div>
           </div>
           <div class="forms-group line">
