@@ -38,7 +38,7 @@ function toggleButtonState() {
 ### 필수값 모두 입력 안함
 
 ```javascript
-// 유효성 검사 함수
+
 function validateForm() {
   if (areaInput.value === "") {
     alert(
@@ -104,7 +104,6 @@ function handleAreaClose() {
 ```
 
 ```javascript
-// 지역선택 버튼 이벤트 등록
 AreaOpenBtn.addEventListener("click", handleAreaOpen);
 AreaCloseBtn.addEventListener("click", handleAreaClose);
 ```
